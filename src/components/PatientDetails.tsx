@@ -7,7 +7,9 @@ export default function PatientDetails({ patient } : {patient: Patient}) {
     const { removePatient, getPatientById } = usePatientStore()
 
     return (
-        <div className="mx-5 my-10 px-5 py-10 bg-white shadow-md rounded-xl">
+        <div 
+            className="mx-5 my-10 px-5 py-10 bg-white shadow-md rounded-xl"
+        >
 
             <PatientDetailsItem label="ID" data={patient.id}/>
             <PatientDetailsItem label="Nombre" data={patient.name}/>

@@ -8,7 +8,8 @@ type PatientState = {
     activeId: string,
     addPatient: (data: DraftPatient) => void,
     removePatient: (id: Patient['id']) => void,
-    getPatientById: (id: Patient['id']) => void
+    getPatientById: (id: Patient['id']) => void,
+    updatePatient: (data: DraftPatient) => void
 }
 
 const createPatient = (data : DraftPatient) : Patient => {
@@ -24,7 +25,8 @@ export const usePatientStore = create<PatientState>()(
             const patient = createPatient(data)
 
             set((state) => ({
-                patients: [...state.patients, patient]
+                patients: [...state.patients, patient],
+                activeId: ''
             }))
         },
 
@@ -39,6 +41,13 @@ export const usePatientStore = create<PatientState>()(
             set(() => ({
                 activeId: id
                 
+            }))
+        },
+
+        updatePatient: (data) => {
+            set((state) => ({
+                patients: state.patients.map( patient => patient.id === state.activeId ? {id: state.activeId, ...data} : patient ),
+                activeId: ''                
             }))
         }
     })
